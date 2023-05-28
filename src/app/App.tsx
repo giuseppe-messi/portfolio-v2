@@ -1,3 +1,9 @@
+import { Header } from "./sections/header/Header";
+
 export const App = () => {
-  return <div>Portfolio</div>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 };
