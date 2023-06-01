@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Particles from "react-tsparticles";
 
-export const Particle = styled(Particles)`
+export const ParticleCanvas = styled(Particles)`
   position: fixed;
   top: 0;
   left: 0;

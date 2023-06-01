@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import * as S from "./AnimatedHeading.styles";
 
-type LettersAnimationState = {
+type LettersAnimetionObj = {
   [key: string]: boolean;
 };
 
@@ -9,36 +9,42 @@ interface AnimatedHeadingProps {
   text: string;
 }
 
+const createIndexesObj = (num: number) => {
+  const obj: LettersAnimetionObj = {};
+  Array.from({ length: num }, (_, i) => (obj[i] = false));
+  return obj;
+};
+
 export const AnimatedHeading = ({ text }: AnimatedHeadingProps) => {
-  const state = text
-    .split("")
-    .reduce((stateObj, _, i) => ({ ...stateObj, [i]: false }), {});
+  const [animeLetters, setAnimeLetters] = useState<LettersAnimetionObj>(
+    createIndexesObj(text.length)
+  );
 
-  const [lettersAnimationState, setLettersAnimationState] =
-    useState<LettersAnimationState>(state);
+  const handleSetAnimeLetters = useCallback((index: number) => {
+    setAnimeLetters((prevState) => ({ ...prevState, [index]: true }));
+  }, []);
 
-  const handleSetLetterAnimation = (index: number) => {
-    setLettersAnimationState((prevState) => ({ ...prevState, [index]: true }));
-  };
-  const handleStopLetterAnimation = (index: number) => {
-    setLettersAnimationState((prevState) => ({ ...prevState, [index]: false }));
-  };
+  const handleStopAnimeLetters = useCallback((index: number) => {
+    setAnimeLetters((prevState) => ({ ...prevState, [index]: false }));
+  }, []);
+
   return (
-    <>
+    <S.Heading>
       {text.split("").map((letter, index) => {
-        const test = (index + 1) * 180;
+        const delay = (index + 1) * 180;
+
         return (
-          <S.Letter
-            onMouseEnter={() => handleSetLetterAnimation(index)}
-            onAnimationEnd={() => handleStopLetterAnimation(index)}
-            isAnimating={lettersAnimationState[index]}
-            delay={test}
-            key={index}
-          >
-            {letter}
-          </S.Letter>
+          <S.LetterWrap key={index} delay={delay}>
+            <S.Letter
+              onMouseEnter={() => handleSetAnimeLetters(index)}
+              onAnimationEnd={() => handleStopAnimeLetters(index)}
+              isAnimating={animeLetters[index]}
+            >
+              {letter}
+            </S.Letter>
+          </S.LetterWrap>
         );
       })}
-    </>
+    </S.Heading>
   );
 };

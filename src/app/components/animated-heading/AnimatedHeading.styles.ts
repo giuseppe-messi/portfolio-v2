@@ -1,8 +1,8 @@
 import styled, { css, keyframes } from "styled-components";
 
 interface HeaderProps {
-  delay?: number;
-  isAnimating?: boolean;
+  delay: number;
+  isAnimating: boolean;
 }
 
 const move = keyframes`
@@ -17,8 +17,19 @@ const move = keyframes`
   100% {transform: translateY(0px);}
   `;
 
-export const Letter = styled.span<Pick<HeaderProps, "isAnimating" | "delay">>`
-  /* animation: ${move} 1s 1 ${({ delay }) => delay}ms forwards ease-out; */
+export const Heading = styled.h1`
+  color: white;
+  text-align: center;
+  font-size: 6em;
+  margin-top: 2em;
+  display: flex;
+`;
+
+export const LetterWrap = styled.span<Pick<HeaderProps, "delay">>`
+  animation: ${move} 1s 1 ${({ delay }) => delay}ms forwards ease-out;
+`;
+
+export const Letter = styled.span<Pick<HeaderProps, "isAnimating">>`
   display: inline-block;
   cursor: default;
 

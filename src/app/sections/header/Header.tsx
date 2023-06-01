@@ -4,11 +4,9 @@ import * as S from "./Header.styles";
 
 export const Header = () => {
   return (
-    <>
+    <S.Header>
       <ParticlesBackground />
-      <S.Heading>
-        <AnimatedHeading text="Giuseppe" />
-      </S.Heading>
-    </>
+      <AnimatedHeading text="Giuseppe" />
+    </S.Header>
   );
 };
