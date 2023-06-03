@@ -1,5 +1,5 @@
 import * as S from "./Nav.styles";
-import { useCallback, useReducer } from "react";
+import { memo, useCallback, useReducer } from "react";
 import { navItems } from "./navItems";
 import { cursorStore } from "src/store/cursorStore";
 
@@ -13,8 +13,14 @@ interface NavReducerAction {
   data: string | null;
 }
 
-export const Nav = () => {
+interface NavProps {
+  hasPassedHeader: boolean | null;
+}
+
+export const Nav = memo(({ hasPassedHeader }: NavProps) => {
   const { setIsCursorVisible } = cursorStore();
+
+  console.log("hasPassedHeader: ", hasPassedHeader);
 
   const reducerFunc = useCallback(
     (_: NavReducerState, action: NavReducerAction): NavReducerState => {
@@ -50,7 +56,7 @@ export const Nav = () => {
   }, []);
 
   return (
-    <S.Nav>
+    <S.Nav hasPassedHeader={hasPassedHeader!}>
       <S.List>
         {navItems.map((item) => {
           const { name } = item;
@@ -64,11 +70,13 @@ export const Nav = () => {
               hasHovering={hasHovering}
               isCurrent={current === name}
             >
-              {name}
+              {name.split("").map((l) => (
+                <span>{l}</span>
+              ))}
             </S.ListItem>
           );
         })}
       </S.List>
     </S.Nav>
   );
-};
+});

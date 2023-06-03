@@ -1,17 +1,20 @@
-import styled, { css, keyframes } from "styled-components";
+import styled from "styled-components";
 
 interface NavProps {
+  hasPassedHeader: boolean;
   hasHovering: boolean;
   isCurrent: boolean;
 }
 
-export const Nav = styled.nav`
+export const Nav = styled.nav<Pick<NavProps, "hasPassedHeader">>`
   position: fixed;
   width: 100%;
-  height: 2.2em;
+  height: 3em;
+  background: ${({ hasPassedHeader }) =>
+    hasPassedHeader ? "black" : "transparent"};
   padding: 0 1em;
   color: white;
-  font-size: 1.5em;
+  font-size: 1.1em;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -20,39 +23,19 @@ export const Nav = styled.nav`
 
 export const List = styled.ul`
   display: flex;
-  gap: 3em;
+  gap: 2em;
 `;
 
-const strike = keyframes`
-  0%   { width : 0; }
-  100% { width: 100%; }`;
-
-const test = css`
-  &:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0px;
-    width: 100%;
-    height: 2px;
-    background: rgb(255, 0, 0);
-    animation: ${strike} 0.6s linear 1 forwards;
-    z-index: 1;
-  }
-`;
-
-export const ListItem = styled.li<NavProps>`
+export const ListItem = styled.li<Pick<NavProps, "hasHovering" | "isCurrent">>`
   list-style-type: none;
   cursor: pointer;
   position: relative;
-  transition: transform 0.3s;
+  transition: transform 0.3s, opacity 0.3s;
 
   opacity: ${({ hasHovering, isCurrent }) =>
     hasHovering ? (isCurrent ? 1 : 0.5) : 1};
 
-  ${({ hasHovering, isCurrent }) => (hasHovering ? (isCurrent ? 1 : test) : 1)};
-
-  &::before {
+  &::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -70,7 +53,7 @@ export const ListItem = styled.li<NavProps>`
   &:hover {
     transform: scale(1.4);
 
-    &:before {
+    &:after {
       width: 120px;
       height: 120px;
       opacity: 0.5;
