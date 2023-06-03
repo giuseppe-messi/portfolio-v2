@@ -17,12 +17,20 @@ const move = keyframes`
   100% {transform: translateY(0px);}
   `;
 
+export const Test = styled.span`
+  text-shadow: rgb(196 19 19 / 69%) 8px 6px;
+  background: #03a9f46b;
+  border-radius: 50px;
+`;
+
 export const Heading = styled.h1`
   color: white;
-  text-align: center;
-  font-size: 6em;
+  font-size: 5em;
   margin-top: 2em;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  // text-shadow: 8px 6px #c41313eb;
 `;
 
 export const LetterWrap = styled.span<Pick<HeaderProps, "delay">>`

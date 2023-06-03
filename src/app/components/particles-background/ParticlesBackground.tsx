@@ -1,11 +1,27 @@
 import { useCallback } from "react";
 import { Container, Engine } from "tsparticles-engine";
 import { loadFull } from "tsparticles";
+// import { loadColorUpdater } from "tsparticles-updater-color";
+// import { loadCircleShape } from "tsparticles-shape-circle";
+// import { loadBaseMover } from "tsparticles-move-base";
+// import { loadSizeUpdater } from "tsparticles-updater-size";
+// import { loadOpacityUpdater } from "tsparticles-updater-opacity";
+// import { loadOutModesUpdater } from "tsparticles-updater-out-modes";
+// import { loadParticlesLinksInteraction } from "tsparticles-interaction-particles-links";
+
 import * as S from "./ParticlesBackground.styles";
 
 export const ParticlesBackground = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
-    // console.log(engine);
+    console.log(engine);
+
+    // await loadCircleShape(engine);
+    // await loadBaseMover(engine);
+    // await loadSizeUpdater(engine);
+    // await loadColorUpdater(engine);
+    // await loadOpacityUpdater(engine);
+    // await loadOutModesUpdater(engine);
+    // await loadParticlesLinksInteraction(engine);
 
     // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
     // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
@@ -13,18 +29,20 @@ export const ParticlesBackground = () => {
     await loadFull(engine);
   }, []);
 
-  // const particlesLoaded = useCallback(
-  //   async (container: Container | undefined) => {
-  //     await console.log(container);
-  //   },
-  //   []
-  // );
+  const particlesLoaded = useCallback(
+    async (container: Container | undefined) => {
+      await console.log(container);
+    },
+    []
+  );
   return (
     <S.ParticleCanvas
-      id="tsparticles"
+      id="particles"
       init={particlesInit}
-      // loaded={particlesLoaded}
+      loaded={particlesLoaded}
       options={{
+        smooth: true,
+        fullScreen: { enable: true },
         background: {
           color: {
             value: "#00000078",
@@ -33,10 +51,6 @@ export const ParticlesBackground = () => {
         fpsLimit: 120,
         interactivity: {
           events: {
-            onClick: {
-              enable: true,
-              mode: "push",
-            },
             onHover: {
               enable: true,
               mode: "repulse",
@@ -48,7 +62,7 @@ export const ParticlesBackground = () => {
               quantity: 4,
             },
             repulse: {
-              distance: 200,
+              distance: 100,
               duration: 0.4,
             },
           },
@@ -94,7 +108,6 @@ export const ParticlesBackground = () => {
             value: { min: 1, max: 2 },
           },
         },
-        detectRetina: true,
       }}
     />
   );

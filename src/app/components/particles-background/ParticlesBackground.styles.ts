@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Particles from "react-tsparticles";
 
 export const ParticleCanvas = styled(Particles)`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;

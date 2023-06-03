@@ -17,6 +17,7 @@ const moveTextBG = keyframes`
 
 export const Test = styled.h1`
   font-size: 10em;
+  text-align: center;
   font-weight: bold;
   color: transparent;
   background-image: url(${TextBackground});
@@ -24,12 +25,11 @@ export const Test = styled.h1`
   background-repeat: repeat-x;
   background-attachment: fixed;
   -webkit-background-clip: text;
-
   background-clip: text;
   animation: ${moveTextBG} 20s linear infinite;
 `;
 
 export const Box = styled.div`
-  background-color: #2d2626;
-  padding: 0 2em;
+  background-color: black;
+  padding: 4em 3em;
 `;

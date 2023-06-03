@@ -6,7 +6,7 @@ export const Header = () => {
   return (
     <S.Header>
       <ParticlesBackground />
-      <AnimatedHeading text="Giuseppe" />
+      <AnimatedHeading text="GM" />
     </S.Header>
   );
 };

@@ -29,22 +29,26 @@ export const AnimatedHeading = ({ text }: AnimatedHeadingProps) => {
   }, []);
 
   return (
-    <S.Heading>
-      {text.split("").map((letter, index) => {
-        const delay = (index + 1) * 180;
+    <>
+      <S.Heading>
+        <span style={{ display: "flex" }}>
+          {text.split("").map((letter, index) => {
+            const delay = (index + 1) * 180;
 
-        return (
-          <S.LetterWrap key={index} delay={delay}>
-            <S.Letter
-              onMouseEnter={() => handleSetAnimeLetters(index)}
-              onAnimationEnd={() => handleStopAnimeLetters(index)}
-              isAnimating={animeLetters[index]}
-            >
-              {letter}
-            </S.Letter>
-          </S.LetterWrap>
-        );
-      })}
-    </S.Heading>
+            return (
+              <S.LetterWrap key={index} delay={delay}>
+                <S.Letter
+                  onMouseEnter={() => handleSetAnimeLetters(index)}
+                  onAnimationEnd={() => handleStopAnimeLetters(index)}
+                  isAnimating={animeLetters[index]}
+                >
+                  {letter}
+                </S.Letter>
+              </S.LetterWrap>
+            );
+          })}
+        </span>
+      </S.Heading>
+    </>
   );
 };
