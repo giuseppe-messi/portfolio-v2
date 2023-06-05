@@ -1,15 +1,15 @@
 import { create } from "zustand";
 
 interface cursorStoreProps {
-  isCursorVisible: boolean;
-  setIsCursorVisible: (val: boolean) => void;
+  isCursorHoverNavListItem: boolean;
+  setIsCursorHoverNavListItem: (val: boolean) => void;
 }
 
 export const cursorStore = create<cursorStoreProps>((set) => ({
-  isCursorVisible: true,
+  isCursorHoverNavListItem: false,
 
-  setIsCursorVisible: (val) =>
+  setIsCursorHoverNavListItem: (val) =>
     set({
-      isCursorVisible: val,
+      isCursorHoverNavListItem: val,
     }),
 }));

@@ -1,78 +1,38 @@
 import * as S from "./Nav.styles";
-import { memo, useCallback, useReducer } from "react";
+import { memo, useCallback } from "react";
 import { navItems } from "./navItems";
 import { cursorStore } from "src/store/cursorStore";
-
-export interface NavReducerState {
-  hasHovering: boolean;
-  current: string | null;
-}
-
-interface NavReducerAction {
-  type: "onMouseHover" | "onMouseLeave";
-  data: string | null;
-}
 
 interface NavProps {
   hasPassedHeader: boolean | null;
 }
 
 export const Nav = memo(({ hasPassedHeader }: NavProps) => {
-  const { setIsCursorVisible } = cursorStore();
+  const { setIsCursorHoverNavListItem } = cursorStore();
 
-  console.log("hasPassedHeader: ", hasPassedHeader);
-
-  const reducerFunc = useCallback(
-    (_: NavReducerState, action: NavReducerAction): NavReducerState => {
-      const { type, data } = action;
-
-      return {
-        hasHovering: type === "onMouseHover",
-        current: data,
-      };
-    },
+  const handleMouseOver = useCallback(
+    () => setIsCursorHoverNavListItem(true),
     []
   );
 
-  const [state, dispatch] = useReducer(reducerFunc, {
-    hasHovering: false,
-    current: null,
-  });
-
-  const handleMouseOver = useCallback((currentItem: string) => {
-    setIsCursorVisible(false);
-    dispatch({
-      type: "onMouseHover",
-      data: currentItem,
-    });
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setIsCursorVisible(true);
-    dispatch({
-      type: "onMouseLeave",
-      data: null,
-    });
-  }, []);
+  const handleMouseLeave = useCallback(
+    () => setIsCursorHoverNavListItem(false),
+    []
+  );
 
   return (
     <S.Nav hasPassedHeader={hasPassedHeader!}>
       <S.List>
         {navItems.map((item) => {
           const { name } = item;
-          const { hasHovering, current } = state;
 
           return (
             <S.ListItem
               key={name}
-              onMouseOver={() => handleMouseOver(name)}
+              onMouseOver={handleMouseOver}
               onMouseLeave={handleMouseLeave}
-              hasHovering={hasHovering}
-              isCurrent={current === name}
             >
-              {name.split("").map((l) => (
-                <span>{l}</span>
-              ))}
+              {name}
             </S.ListItem>
           );
         })}

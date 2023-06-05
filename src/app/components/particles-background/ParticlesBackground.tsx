@@ -69,7 +69,7 @@ export const ParticlesBackground = () => {
         },
         particles: {
           color: {
-            value: "#ffffff",
+            value: ["#0000ff", "#ff0000"],
           },
           links: {
             color: "#ffffff",

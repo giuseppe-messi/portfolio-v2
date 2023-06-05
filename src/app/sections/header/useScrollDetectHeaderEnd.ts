@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-export const useScrollDetection = () => {
+export const useScrollDetectHeaderEnd = () => {
   const targetRef = useRef<HTMLElement | null>(null);
 
   const [hasPassedHeader, setHasPassedHeader] = useState<boolean | null>(null);
@@ -31,8 +31,15 @@ export const useScrollDetection = () => {
     return () => handleRemoveScroll();
   }, []);
 
+  const cachedTargetRef = useMemo(() => targetRef, [targetRef]);
+
+  const cachedHasPassedHeader = useMemo(
+    () => hasPassedHeader,
+    [hasPassedHeader]
+  );
+
   return {
-    targetRef,
-    hasPassedHeader,
+    targetRef: cachedTargetRef,
+    hasPassedHeader: cachedHasPassedHeader,
   };
 };

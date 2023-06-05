@@ -3,7 +3,7 @@ import * as S from "./CustomCursor.style";
 import { cursorStore } from "src/store/cursorStore";
 
 export const CustomCursor = () => {
-  const { isCursorVisible } = cursorStore();
+  const { isCursorHoverNavListItem } = cursorStore();
 
   const [position, setPosition] = useState({
     x: 0,
@@ -25,9 +25,10 @@ export const CustomCursor = () => {
     return () => removeMoveListener();
   }, []);
 
-  if (!isCursorVisible) {
-    return null;
-  }
-
-  return <S.Cursor position={position} />;
+  return (
+    <S.Cursor
+      position={position}
+      isCursorHoverNavListItem={isCursorHoverNavListItem}
+    />
+  );
 };
