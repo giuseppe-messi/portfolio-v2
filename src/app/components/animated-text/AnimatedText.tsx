@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import * as S from "./AnimatedText.styles";
 
 type LettersAnimetionObj = {
@@ -26,6 +26,15 @@ export const AnimatedText = ({ text }: AnimatedHeadingProps) => {
 
   const handleStopAnimeLetters = useCallback((index: number) => {
     setAnimeLetters((prevState) => ({ ...prevState, [index]: false }));
+  }, []);
+
+  useEffect(() => {
+    const randomAnimation = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * text.length) + 1;
+      handleSetAnimeLetters(randomIndex);
+    }, 5000);
+
+    return () => clearInterval(randomAnimation);
   }, []);
 
   return (

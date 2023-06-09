@@ -15,8 +15,8 @@ const hoveringLisCss = css`
 export const Cursor = styled.div.attrs<Pick<CursorProps, "position">>(
   ({ position: { x, y } }) => ({
     style: {
-      top: y === null ? "50%" : `${y}px`,
-      left: x === null ? "50%" : `${x}px`,
+      top: `${y}px`,
+      left: `${x}px`,
     },
   })
 )<CursorProps>`

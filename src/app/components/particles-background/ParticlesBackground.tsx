@@ -1,13 +1,12 @@
 import { useCallback } from "react";
 import { Container, Engine } from "tsparticles-engine";
-import { loadFull } from "tsparticles";
-// import { loadColorUpdater } from "tsparticles-updater-color";
-// import { loadCircleShape } from "tsparticles-shape-circle";
-// import { loadBaseMover } from "tsparticles-move-base";
-// import { loadSizeUpdater } from "tsparticles-updater-size";
-// import { loadOpacityUpdater } from "tsparticles-updater-opacity";
-// import { loadOutModesUpdater } from "tsparticles-updater-out-modes";
-// import { loadParticlesLinksInteraction } from "tsparticles-interaction-particles-links";
+import { loadColorUpdater } from "tsparticles-updater-color";
+import { loadCircleShape } from "tsparticles-shape-circle";
+import { loadBaseMover } from "tsparticles-move-base";
+import { loadSizeUpdater } from "tsparticles-updater-size";
+import { loadOpacityUpdater } from "tsparticles-updater-opacity";
+import { loadOutModesUpdater } from "tsparticles-updater-out-modes";
+import { loadParticlesLinksInteraction } from "tsparticles-interaction-particles-links";
 
 import * as S from "./ParticlesBackground.styles";
 
@@ -15,18 +14,13 @@ export const ParticlesBackground = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
     console.log(engine);
 
-    // await loadCircleShape(engine);
-    // await loadBaseMover(engine);
-    // await loadSizeUpdater(engine);
-    // await loadColorUpdater(engine);
-    // await loadOpacityUpdater(engine);
-    // await loadOutModesUpdater(engine);
-    // await loadParticlesLinksInteraction(engine);
-
-    // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    // starting from v2 you can add only the features you need reducing the bundle size
-    await loadFull(engine);
+    await loadCircleShape(engine);
+    await loadBaseMover(engine);
+    await loadSizeUpdater(engine);
+    await loadColorUpdater(engine);
+    await loadOpacityUpdater(engine);
+    await loadOutModesUpdater(engine);
+    await loadParticlesLinksInteraction(engine);
   }, []);
 
   const particlesLoaded = useCallback(
@@ -49,24 +43,6 @@ export const ParticlesBackground = () => {
           },
         },
         fpsLimit: 120,
-        // interactivity: {
-        //   events: {
-        //     onHover: {
-        //       enable: true,
-        //       mode: "repulse",
-        //     },
-        //     resize: true,
-        //   },
-        //   modes: {
-        //     push: {
-        //       quantity: 4,
-        //     },
-        //     repulse: {
-        //       distance: 100,
-        //       duration: 0.4,
-        //     },
-        //   },
-        // },
         particles: {
           color: {
             value: "#000000",
