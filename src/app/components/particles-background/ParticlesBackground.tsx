@@ -45,34 +45,34 @@ export const ParticlesBackground = () => {
         fullScreen: { enable: true },
         background: {
           color: {
-            value: "#00000078",
+            value: "#ffffff",
           },
         },
         fpsLimit: 120,
-        interactivity: {
-          events: {
-            onHover: {
-              enable: true,
-              mode: "repulse",
-            },
-            resize: true,
-          },
-          modes: {
-            push: {
-              quantity: 4,
-            },
-            repulse: {
-              distance: 100,
-              duration: 0.4,
-            },
-          },
-        },
+        // interactivity: {
+        //   events: {
+        //     onHover: {
+        //       enable: true,
+        //       mode: "repulse",
+        //     },
+        //     resize: true,
+        //   },
+        //   modes: {
+        //     push: {
+        //       quantity: 4,
+        //     },
+        //     repulse: {
+        //       distance: 100,
+        //       duration: 0.4,
+        //     },
+        //   },
+        // },
         particles: {
           color: {
-            value: ["#0000ff", "#ff0000"],
+            value: "#000000",
           },
           links: {
-            color: "#ffffff",
+            color: "#000000",
             distance: 150,
             enable: true,
             opacity: 0.5,

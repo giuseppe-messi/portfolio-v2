@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import * as S from "./CustomCursor.style";
-import { cursorStore } from "src/store/cursorStore";
+import { useCursorMagnify } from "src/hooks/useCursorMagnify";
+
+export interface PositionCordinates {
+  x: number | null;
+  y: number | null;
+}
 
 export const CustomCursor = () => {
-  const { isCursorHoverNavListItem } = cursorStore();
+  const { magnify } = useCursorMagnify();
 
-  const [position, setPosition] = useState({
-    x: 0,
-    y: 0,
+  const [position, setPosition] = useState<PositionCordinates>({
+    x: null,
+    y: null,
   });
 
   useEffect(() => {
@@ -16,9 +21,9 @@ export const CustomCursor = () => {
 
     const addMoveListener = () =>
       document.addEventListener("mousemove", updatePosition);
-
-    const removeMoveListener = () =>
+    const removeMoveListener = () => {
       document.removeEventListener("mousemove", updatePosition);
+    };
 
     addMoveListener();
 
@@ -26,9 +31,8 @@ export const CustomCursor = () => {
   }, []);
 
   return (
-    <S.Cursor
-      position={position}
-      isCursorHoverNavListItem={isCursorHoverNavListItem}
-    />
+    <S.Cursor position={position} magnify={magnify}>
+      <div />
+    </S.Cursor>
   );
 };

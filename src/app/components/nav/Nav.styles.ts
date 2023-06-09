@@ -13,11 +13,11 @@ export const Nav = styled.nav<NavProps>`
     hasPassedHeader ? "black" : "transparent"};
   transition: background-color 0.3s;
   padding: 0 1em;
-  color: white;
-  font-weight: 300;
+  color: black;
+  font-weight: bold;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
   z-index: 1;
 `;
 

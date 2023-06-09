@@ -1,11 +1,11 @@
 import styled, { css, keyframes } from "styled-components";
 
-interface HeaderProps {
+interface AnimatedTextStylesProps {
   delay: number;
   isAnimating: boolean;
 }
 
-const move = keyframes`
+export const move = keyframes`
   0% {transform: translateY(0px);}
   10% {transform: translateY(-20px) scale(1.4,.6);}
   15% {transform: translateY(-27px) scale(1.44,.6);}
@@ -17,21 +17,20 @@ const move = keyframes`
   100% {transform: translateY(0px);}
   `;
 
-export const Heading = styled.h1`
-  color: white;
-  font-size: 5em;
-  margin-top: 2em;
+export const WrapperSpan = styled.span`
+  font-size: 3em;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: end;
 `;
 
-export const LetterWrap = styled.span<Pick<HeaderProps, "delay">>`
+export const LetterBoxSpan = styled.span<
+  Pick<AnimatedTextStylesProps, "delay">
+>`
   animation: ${move} 1s 1 ${({ delay }) => delay}ms forwards ease-out;
 `;
 
-export const Letter = styled.span<Pick<HeaderProps, "isAnimating">>`
+export const LetterSpan = styled.span<
+  Pick<AnimatedTextStylesProps, "isAnimating">
+>`
   display: inline-block;
   cursor: default;
 

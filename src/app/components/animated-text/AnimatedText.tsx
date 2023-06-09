@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import * as S from "./AnimatedHeading.styles";
+import * as S from "./AnimatedText.styles";
 
 type LettersAnimetionObj = {
   [key: string]: boolean;
@@ -15,7 +15,7 @@ const createIndexesObj = (num: number) => {
   return obj;
 };
 
-export const AnimatedHeading = ({ text }: AnimatedHeadingProps) => {
+export const AnimatedText = ({ text }: AnimatedHeadingProps) => {
   const [animeLetters, setAnimeLetters] = useState<LettersAnimetionObj>(
     createIndexesObj(text.length)
   );
@@ -30,25 +30,23 @@ export const AnimatedHeading = ({ text }: AnimatedHeadingProps) => {
 
   return (
     <>
-      <S.Heading>
-        <span style={{ display: "flex" }}>
-          {text.split("").map((letter, index) => {
-            const delay = (index + 1) * 180;
+      <S.WrapperSpan>
+        {text.split("").map((letter, index) => {
+          const delay = (index + 1) * 180;
 
-            return (
-              <S.LetterWrap key={index} delay={delay}>
-                <S.Letter
-                  onMouseEnter={() => handleSetAnimeLetters(index)}
-                  onAnimationEnd={() => handleStopAnimeLetters(index)}
-                  isAnimating={animeLetters[index]}
-                >
-                  {letter}
-                </S.Letter>
-              </S.LetterWrap>
-            );
-          })}
-        </span>
-      </S.Heading>
+          return (
+            <S.LetterBoxSpan key={index} delay={delay}>
+              <S.LetterSpan
+                onMouseEnter={() => handleSetAnimeLetters(index)}
+                onAnimationEnd={() => handleStopAnimeLetters(index)}
+                isAnimating={animeLetters[index]}
+              >
+                {letter}
+              </S.LetterSpan>
+            </S.LetterBoxSpan>
+          );
+        })}
+      </S.WrapperSpan>
     </>
   );
 };

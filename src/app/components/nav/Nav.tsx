@@ -1,24 +1,17 @@
 import * as S from "./Nav.styles";
 import { memo, useCallback } from "react";
 import { navItems } from "./navItems";
-import { cursorStore } from "src/store/cursorStore";
+import { useCursorMagnify } from "src/hooks/useCursorMagnify";
 
 interface NavProps {
   hasPassedHeader: boolean | null;
 }
 
 export const Nav = memo(({ hasPassedHeader }: NavProps) => {
-  const { setIsCursorHoverNavListItem } = cursorStore();
+  const { setMagnify } = useCursorMagnify();
 
-  const handleMouseOver = useCallback(
-    () => setIsCursorHoverNavListItem(true),
-    []
-  );
-
-  const handleMouseLeave = useCallback(
-    () => setIsCursorHoverNavListItem(false),
-    []
-  );
+  const handleMouseOver = useCallback(() => setMagnify(true), []);
+  const handleMouseLeave = useCallback(() => setMagnify(false), []);
 
   return (
     <S.Nav hasPassedHeader={hasPassedHeader!}>
