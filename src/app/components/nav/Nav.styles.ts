@@ -17,7 +17,7 @@ export const Nav = styled.nav<NavProps>`
   font-weight: bold;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
   z-index: 1;
 `;
 

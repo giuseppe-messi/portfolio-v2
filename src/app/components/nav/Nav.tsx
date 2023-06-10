@@ -15,6 +15,7 @@ export const Nav = memo(({ hasPassedHeader }: NavProps) => {
 
   return (
     <S.Nav hasPassedHeader={hasPassedHeader!}>
+      <div>GM</div>
       <S.List>
         {navItems.map((item) => {
           const { name } = item;
