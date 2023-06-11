@@ -14,30 +14,30 @@ type TabsType = <T>({ items }: TabsProps<T>) => JSX.Element;
 export const Tabs: TabsType = ({ items, getId, getTitle, getText }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  console.log(currentIndex);
-
   const handleTabIndex = useCallback((id: number) => setCurrentIndex(id), []);
 
-  const Buttons = useMemo(
-    () =>
-      items.map((item) => (
-        <Button
-          key={getId(item)}
-          text={getTitle(item)}
-          onClick={() => handleTabIndex(getId(item))}
-        />
-      )),
-    []
+  const currentPanel = useMemo(
+    () => getText(items[currentIndex]),
+    [currentIndex]
   );
-
-  console.log(getText(items[currentIndex]));
-
-  const pannel = useMemo(() => getText(items[currentIndex]), [currentIndex]);
 
   return (
     <S.TabsWrapperDiv>
-      <div>{Buttons}</div>
-      <div>{pannel}</div>
+      <S.TabsBoxDiv>
+        {items.map((item) => {
+          const id = getId(item);
+          const title = getTitle(item);
+          return (
+            <Button
+              key={id}
+              text={title}
+              current={currentIndex === id}
+              onClickCallBack={() => handleTabIndex(id)}
+            />
+          );
+        })}
+      </S.TabsBoxDiv>
+      <S.PanelDiv>{currentPanel}</S.PanelDiv>
     </S.TabsWrapperDiv>
   );
 };

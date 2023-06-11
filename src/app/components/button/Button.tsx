@@ -2,9 +2,14 @@ import * as S from "./Button.styles";
 
 interface Props {
   text: string;
-  onClick: () => void;
+  current: boolean;
+  onClickCallBack: () => void;
 }
 
-export const Button = ({ text, onClick }: Props) => {
-  return <S.Button onClick={onClick}>{text}</S.Button>;
+export const Button = ({ text, current, onClickCallBack }: Props) => {
+  return (
+    <S.Button current={current} onClick={onClickCallBack}>
+      {text}
+    </S.Button>
+  );
 };
