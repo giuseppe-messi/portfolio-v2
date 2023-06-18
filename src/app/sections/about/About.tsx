@@ -1,4 +1,4 @@
-import { Tabs } from "src/app/components/tabs/Tabs";
+import { Carousel } from "src/app/components/carousel/Carousel";
 import * as S from "./About.styles";
 import { usePanelsAboutSection } from "src/hooks/usePanelsAboutSection";
 
@@ -13,11 +13,11 @@ export const About = () => {
           <div>Illustration here!</div>
         </S.ImageDiv>
         <S.AboutOptionsDiv>
-          <Tabs
+          <Carousel
             items={panels}
-            getId={(item) => item.id}
             getTitle={(item) => item.title}
-            getText={(item) => item.text}
+            getContent={(item) => item.text}
+            withAnimation
           />
         </S.AboutOptionsDiv>
       </S.AboutBox>

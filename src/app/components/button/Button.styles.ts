@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 
 interface ButtonProps {
   current: boolean;
+  asDot?: boolean;
 }
 
 const hoverStyles = css`
@@ -17,4 +18,13 @@ export const Button = styled.button<ButtonProps>`
   border: 1px solid black;
   border-radius: 5px;
   cursor: pointer;
+
+  ${({ asDot }) =>
+    asDot &&
+    css`
+      padding: 0;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+    `}
 `;

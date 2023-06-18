@@ -24,7 +24,7 @@ export const App = () => {
       <OtherSection />
       <TechIUse />
       <OtherSection />
-      <ParticlesBackground />
+      {/* <ParticlesBackground /> */}
     </>
   );
 };
